@@ -82,7 +82,7 @@ def load_and_train_model():
 
     return rf_model, genre_encoder, author_encoder
 
-# --- Prediction Function ---
+#Prediction Function
 
 def predict_bestseller_for_app(model, genre_encoder, author_encoder, name, price, reviews, rating, year, genre, author):
     """Generates features and predicts bestseller status using the trained model."""
@@ -97,7 +97,7 @@ def predict_bestseller_for_app(model, genre_encoder, author_encoder, name, price
     word_count = len(name.split())
     punct_per = punctuation_percent(name)
 
-    # Encoding new categorical data (handling unseen data)
+    # Encoding new categorical data 
     try:
         genre_val = genre_encoder.transform([genre])[0]
     except ValueError:
@@ -118,7 +118,7 @@ def predict_bestseller_for_app(model, genre_encoder, author_encoder, name, price
     
     return prob
 
-# --- Streamlit Application UI ---
+# Streamlit Application UI 
 
 st.title("📚 Amazon Bestseller Predictor")
 
@@ -147,7 +147,7 @@ if model is not None:
         rating = st.sidebar.slider("User Rating (0.0 to 5.0)", min_value=0.0, max_value=5.0, value=4.5, step=0.1)
         year = st.sidebar.number_input("Publication Year", min_value=2000, value=2024, step=1)
         
-        # 2. Prediction on button click (in main panel)
+        # 2. Prediction on button click 
         if st.button("Predict Bestseller Status"):
             
             probability = predict_bestseller_for_app(
